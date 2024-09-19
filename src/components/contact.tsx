@@ -3,9 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
 
-import { sendEmail } from "@/actions/send-email";
 import { Button } from "@/components/button";
 import { Icons } from "@/components/icons";
 import { SectionHeading } from "@/components/section-heading";
@@ -19,22 +17,8 @@ export const Contact = () => {
   const { ref } = useSectionInView("Contact");
   const {
     register,
-    handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<TFormSchema>({ resolver: zodResolver(formSchema) });
-
-  const onSubmit = async (values: TFormSchema) => {
-    const { data, error } = await sendEmail(values);
-
-    if (error) {
-      toast.error(error);
-      return;
-    }
-
-    toast.success(data);
-    reset();
-  };
 
   return (
     <motion.section
@@ -74,10 +58,7 @@ export const Contact = () => {
             }
           />
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-center gap-5"
-          >
+          <form className="flex flex-col items-center gap-5">
             {/* Name and Email side by side */}
             <div className="flex w-full max-w-xl gap-5">
               <div className="w-1/2">
