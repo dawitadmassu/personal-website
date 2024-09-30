@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 import { Button } from "@/components/button";
 import { Icons } from "@/components/icons";
@@ -17,8 +18,36 @@ export const Contact = () => {
   const { ref } = useSectionInView("Contact");
   const {
     register,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TFormSchema>({ resolver: zodResolver(formSchema) });
+
+  const onSubmit = async (values: TFormSchema) => {
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL || "/api/sendMessage",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values), // Pass form values
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message.");
+      }
+
+      toast.success(result.data || "Email sent successfully!");
+      reset(); // Reset form after success
+    } catch (error: any) {
+      toast.error(error?.message || "Something went wrong.");
+    }
+  };
 
   return (
     <motion.section
@@ -58,7 +87,10 @@ export const Contact = () => {
             }
           />
 
-          <form className="flex flex-col items-center gap-5">
+          <form
+            className="flex flex-col items-center gap-5"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             {/* Name and Email side by side */}
             <div className="flex w-full max-w-xl gap-5">
               <div className="w-1/2">

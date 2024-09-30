@@ -173,8 +173,8 @@ export const skillsList = [
 
 export const contactDetails = {
   email: "dawit.getachew1@gmail.com",
-  phone: "+1 (234) 567-890",
-  address: "123 Main Street, Nashville, TN 37209",
+  phone: "+1 (641) 233-9940",
+  address: "Nashville, TN 37209",
   mapUrl:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093717!2d144.95543131589745!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577fdd2f9e6d291!2s123%20Main%20St%2C%20Nashville%20TN%2037209%2C%20USA!5e0!3m2!1sen!2sus!4v1633248105212!5m2!1sen!2sus",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d421845.2785426649!2d-87.11489175514399!3d36.18618861222433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8864ec3213eb903d%3A0x7d3fb9d0a1e9daa0!2sNashville%2C%20TN!5e1!3m2!1sen!2sus!4v1727664888561!5m2!1sen!2sus",
 } as const;

@@ -30,9 +30,9 @@ export const Experience = () => {
       />
       <VerticalTimeline lineColor="hsl(var(--muted))">
         {experiencesData.map(
-          ({ title, company, description, location, date }) => (
+          ({ title, company, description, location, date }, index) => (
             <VerticalTimelineElement
-              key={title}
+              key={"k" + index}
               visible={inView}
               contentStyle={{
                 background: "hsl(var(--secondary))",
