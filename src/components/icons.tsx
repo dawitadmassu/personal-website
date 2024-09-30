@@ -9,12 +9,14 @@ import {
   Moon,
   Star,
   Sun,
+  Loader2,
 } from "lucide-react";
 
 export const Icons = {
   sun: Sun,
   moon: Moon,
   arrowRight: ArrowRight,
+  spinner: Loader2,
   download: Download,
   preview: ExternalLink,
   githubOutline: Github,

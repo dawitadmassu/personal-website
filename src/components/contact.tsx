@@ -13,6 +13,7 @@ import { formSchema, TFormSchema } from "@/lib/form-schema";
 import { cn } from "@/lib/utils";
 import { ContactInfo } from "./contact_info";
 import { SectionHeadingSmall } from "./section-heading-sm";
+import { useState } from "react";
 
 export const Contact = () => {
   const { ref } = useSectionInView("Contact");
@@ -23,8 +24,11 @@ export const Contact = () => {
     formState: { errors },
   } = useForm<TFormSchema>({ resolver: zodResolver(formSchema) });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (values: TFormSchema) => {
     try {
+      setIsLoading(true);
       const response = await fetch(
         "https://3mtuj64sv4.execute-api.us-east-1.amazonaws.com/v1/",
         {
@@ -46,6 +50,8 @@ export const Contact = () => {
       reset(); // Reset form after success
     } catch (error) {
       toast.error((error as Error)?.message || "Something went wrong.");
+    } finally {
+      setIsLoading(false); // Set loading false when the request finishes
     }
   };
 
@@ -232,8 +238,17 @@ export const Contact = () => {
               )}
             </div>
 
-            <Button size="lg">
-              Submit <Icons.arrowRight className="ml-2 size-4" />
+            <Button size="lg" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  Submitting...{" "}
+                  <Icons.spinner className="ml-2 size-4 animate-spin" />
+                </>
+              ) : (
+                <>
+                  Submit <Icons.arrowRight className="ml-2 size-4" />
+                </>
+              )}
             </Button>
           </form>
         </div>
