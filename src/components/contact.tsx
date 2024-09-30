@@ -44,8 +44,8 @@ export const Contact = () => {
 
       toast.success(result.data || "Email sent successfully!");
       reset(); // Reset form after success
-    } catch (error: any) {
-      toast.error(error?.message || "Something went wrong.");
+    } catch (error) {
+      toast.error((error as Error)?.message || "Something went wrong.");
     }
   };
 
