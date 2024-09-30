@@ -26,7 +26,7 @@ export const Contact = () => {
   const onSubmit = async (values: TFormSchema) => {
     try {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL || "/api/sendMessage",
+        "https://3mtuj64sv4.execute-api.us-east-1.amazonaws.com/v1/",
         {
           method: "POST",
           headers: {
